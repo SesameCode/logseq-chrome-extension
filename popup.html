@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 0;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      background: #f8fafc;
+    }
+    
+    .header {
+      background: #6366f1;
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo {
+      width: 28px;
+      height: 28px;
+      margin-right: 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+    }
+    
+    .content {
+      padding: 16px;
+    }
+    
+    .status {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .status-title {
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    
+    .capture-preview {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 16px;
+      max-height: 120px;
+      overflow-y: auto;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #475569;
+    }
+    
+    .empty-state {
+      color: #94a3b8;
+      font-style: italic;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .button {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+      display: inline-block;
+    }
+    
+    .button-primary {
+      background: #6366f1;
+      color: white;
+    }
+    
+    .button-primary:hover {
+      background: #5855eb;
+    }
+    
+    .button-secondary {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+    
+    .button-secondary:hover {
+      background: #f9fafb;
+    }
+    
+    .button:disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      cursor: not-allowed;
+    }
+    
+    .instructions {
+      background: white;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: #6b7280;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .shortcut {
+      font-family: monospace;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+    .success-message {
+      background: #d1fae5;
+      color: #065f46;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+    
+    .url-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: monospace;
+      background: #f9fafb;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">L</div>
+    <div class="title">Logseq Capture</div>
+  </div>
+  
+  <div class="content">
+    <div class="status">
+      <div class="status-title">Last Captured Text</div>
+      <div class="capture-preview" id="capturePreview">
+        <div class="empty-state">No text captured yet</div>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <button class="button button-secondary" id="captureBtn">
+        📋 Capture Selected
+      </button>
+      <button class="button button-primary" id="copyBtn" disabled>
+        📄 Copy Text
+      </button>
+    </div>
+    
+    <div class="actions">
+      <input type="text" class="url-input" id="logseqUrl" placeholder="logseq://x-callback-url/quickCapture" value="logseq://x-callback-url/quickCapture">
+      <button class="button button-primary" id="openLogseqBtn" disabled>
+        🚀 Open Logseq
+      </button>
+    </div>
+    
+    <div class="instructions">
+      <strong>How to use:</strong><br>
+      1. Select text on any webpage<br>
+      2. Right-click → "Capture to Logseq" or use <span class="shortcut">Ctrl+Shift+L</span><br>
+      3. Copy the formatted text and paste into Logseq
+    </div>
+    
+    <div class="success-message" id="successMessage"></div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
